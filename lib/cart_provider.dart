@@ -4,7 +4,7 @@ import 'package:uuid/uuid.dart';
 
 class CartProvider extends ChangeNotifier {
   final List<CartItem> cart = [];
-  final uuid = Uuid();
+  final _uuid = Uuid();
   void addProduct({
     required String productId,
     required int size,
@@ -15,7 +15,7 @@ class CartProvider extends ChangeNotifier {
     );
     if (existingCartItemIndex == -1) {
       cart.add(CartItem(
-        id: uuid.v4(),
+        id: _uuid.v4(),
         productId: productId,
         size: size,
         quantity: quantity,
