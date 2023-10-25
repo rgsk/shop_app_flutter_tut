@@ -17,16 +17,17 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        // IndexedStack allows us to maintain the
-        // scroll position when moving across the pages
-        child: IndexedStack(
-          index: currentPageIndex,
-          children: pages,
-        ),
+      // IndexedStack allows us to maintain the
+      // scroll position when moving across the pages
+      body: IndexedStack(
+        index: currentPageIndex,
+        children: pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        iconSize: 35,
         currentIndex: currentPageIndex,
+        selectedFontSize: 0,
+        unselectedFontSize: 0,
         onTap: (value) {
           setState(() {
             currentPageIndex = value;
@@ -35,11 +36,11 @@ class _HomePageState extends State<HomePage> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
-            label: 'Cart',
+            label: '',
           ),
         ],
       ),

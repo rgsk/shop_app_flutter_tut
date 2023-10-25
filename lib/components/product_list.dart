@@ -32,91 +32,96 @@ class _ProductListState extends State<ProductList> {
         left: Radius.circular(50),
       ),
     );
-    return Column(
-      children: [
-        Row(
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
           children: [
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: Text(
-                'Shoes\nCollection',
-                style: Theme.of(context).textTheme.titleLarge,
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Text(
+                    'Shoes\nCollection',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ),
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Search',
+                      prefixIcon: Icon(
+                        Icons.search,
+                      ),
+                      enabledBorder: border,
+                      focusedBorder: border,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 120,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: filters.length,
+                itemBuilder: (context, index) {
+                  final filter = filters[index];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                    ),
+                    child: Category(
+                      filter: filter,
+                      active: selectedFilter == filter,
+                      onTap: () {
+                        setState(() {
+                          selectedFilter = filter;
+                        });
+                      },
+                    ),
+                  );
+                },
               ),
             ),
             Expanded(
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Search',
-                  prefixIcon: Icon(
-                    Icons.search,
-                  ),
-                  enabledBorder: border,
-                  focusedBorder: border,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    final product = products[index];
+                    return Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) {
+                                return ProductDetailsPage(
+                                  product: product,
+                                );
+                              },
+                            ));
+                          },
+                          child: ProductCard(
+                            product: product,
+                            backgroundColor: index.isEven
+                                ? AppColors.blue
+                                : AppColors.lightBlue,
+                          ),
+                        ),
+                        if (index != products.length - 1)
+                          SizedBox(
+                            height: 40,
+                          ),
+                      ],
+                    );
+                  },
+                  itemCount: products.length,
                 ),
               ),
             ),
           ],
         ),
-        SizedBox(
-          height: 120,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: filters.length,
-            itemBuilder: (context, index) {
-              final filter = filters[index];
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                ),
-                child: Category(
-                  filter: filter,
-                  active: selectedFilter == filter,
-                  onTap: () {
-                    setState(() {
-                      selectedFilter = filter;
-                    });
-                  },
-                ),
-              );
-            },
-          ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                final product = products[index];
-                return Column(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) {
-                            return ProductDetailsPage(
-                              product: product,
-                            );
-                          },
-                        ));
-                      },
-                      child: ProductCard(
-                        product: product,
-                        backgroundColor:
-                            index.isEven ? AppColors.blue : AppColors.lightBlue,
-                      ),
-                    ),
-                    if (index != products.length - 1)
-                      SizedBox(
-                        height: 40,
-                      ),
-                  ],
-                );
-              },
-              itemCount: products.length,
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
