@@ -3,6 +3,7 @@ import 'package:shop_app_flutter_tut/app_colors.dart';
 import 'package:shop_app_flutter_tut/components/category.dart';
 import 'package:shop_app_flutter_tut/components/product_card.dart';
 import 'package:shop_app_flutter_tut/global_variables.dart';
+import 'package:shop_app_flutter_tut/product_details_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -91,11 +92,22 @@ class _HomePageState extends State<HomePage> {
                     final product = products[index];
                     return Column(
                       children: [
-                        ProductCard(
-                          product: product,
-                          backgroundColor: index.isEven
-                              ? AppColors.blue
-                              : AppColors.lightBlue,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) {
+                                return ProductDetailsPage(
+                                  product: product,
+                                );
+                              },
+                            ));
+                          },
+                          child: ProductCard(
+                            product: product,
+                            backgroundColor: index.isEven
+                                ? AppColors.blue
+                                : AppColors.lightBlue,
+                          ),
                         ),
                         if (index != products.length - 1)
                           SizedBox(
