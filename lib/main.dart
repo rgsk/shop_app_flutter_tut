@@ -19,16 +19,27 @@ class MyApp extends StatelessWidget {
           seedColor: Color.fromRGBO(254, 206, 1, 1),
           primary: Color.fromRGBO(254, 206, 1, 1),
         ),
+        appBarTheme: AppBarTheme(
+          titleTextStyle: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+          ),
+        ),
         textTheme: TextTheme(
           titleMedium: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
+          ),
+          titleLarge: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 35,
           ),
           bodySmall: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 16,
           ),
         ),
+        useMaterial3: true,
         inputDecorationTheme: InputDecorationTheme(
           hintStyle: TextStyle(
             fontWeight: FontWeight.bold,
@@ -43,6 +54,9 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: HomePage(),
+      // home: ProductDetailsPage(
+      //   product: products[0],
+      // ),
     );
   }
 }
