@@ -26,7 +26,7 @@ class _ProductListState extends State<ProductList> {
     // final size = MediaQuery.of(context).size;
 
     // below is more efficient
-    // final size = MediaQuery.sizeOf(context);
+    final size = MediaQuery.sizeOf(context);
 
     final border = OutlineInputBorder(
       borderSide: BorderSide(
@@ -46,10 +46,13 @@ class _ProductListState extends State<ProductList> {
                 Padding(
                   padding: EdgeInsets.all(20),
                   child: Text(
-                    'Shoes\nCollection',
+                    size.width >= Breakpoints.md
+                        ? 'Shoes Collection'
+                        : 'Shoes\nCollection',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
+                if (size.width >= Breakpoints.md) Spacer(),
                 Expanded(
                   child: TextField(
                     decoration: InputDecoration(
@@ -67,6 +70,7 @@ class _ProductListState extends State<ProductList> {
             SizedBox(
               height: 120,
               child: ListView.builder(
+                shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemCount: filters.length,
                 itemBuilder: (context, index) {
@@ -98,6 +102,8 @@ class _ProductListState extends State<ProductList> {
                         crossAxisSpacing: 20,
                         mainAxisSpacing: 20,
                         childAspectRatio: 1.5,
+
+                        // size.width >= Breakpoints.xl can also be used
                         crossAxisCount: constraints.maxWidth >= Breakpoints.xl
                             ? 4
                             : constraints.maxWidth >= Breakpoints.lg
