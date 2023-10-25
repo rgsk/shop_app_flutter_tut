@@ -8,7 +8,11 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<CartProvider>(context).cart;
+    // final cart = Provider.of<CartProvider>(context).cart;
+
+    // alternative syntax works fine
+    final cart = context.watch<CartProvider>().cart;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Cart'),
@@ -70,10 +74,16 @@ class CartPage extends StatelessWidget {
                           ),
                           TextButton(
                             onPressed: () {
-                              Provider.of<CartProvider>(
-                                context,
-                                listen: false,
-                              ).deleteCartItem(cartItem.id);
+                              // Provider.of<CartProvider>(
+                              //   context,
+                              //   listen: false,
+                              // ).deleteCartItem(cartItem.id);
+
+                              // better alternative
+                              context
+                                  .read<CartProvider>()
+                                  .deleteCartItem(cartItem.id);
+
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content:
