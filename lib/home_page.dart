@@ -18,7 +18,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: pages[currentPageIndex],
+        // IndexedStack allows us to maintain the
+        // scroll position when moving across the pages
+        child: IndexedStack(
+          index: currentPageIndex,
+          children: pages,
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentPageIndex,
