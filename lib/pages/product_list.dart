@@ -26,7 +26,7 @@ class _ProductListState extends State<ProductList> {
     // final size = MediaQuery.of(context).size;
 
     // below is more efficient
-    final size = MediaQuery.sizeOf(context);
+    // final size = MediaQuery.sizeOf(context);
 
     final border = OutlineInputBorder(
       borderSide: BorderSide(
@@ -91,26 +91,31 @@ class _ProductListState extends State<ProductList> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20,
-                    childAspectRatio: 1.5,
-                    crossAxisCount: size.width >= Breakpoints.xl
-                        ? 4
-                        : size.width >= Breakpoints.lg
-                            ? 3
-                            : size.width >= Breakpoints.md
-                                ? 2
-                                : 1,
-                  ),
-                  itemCount: products.length,
-                  itemBuilder: (context, index) {
-                    final product = products[index];
-                    return ProductCard(
-                      product: product,
-                      backgroundColor:
-                          index.isEven ? AppColors.blue : AppColors.lightBlue,
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisSpacing: 20,
+                        mainAxisSpacing: 20,
+                        childAspectRatio: 1.5,
+                        crossAxisCount: constraints.maxWidth >= Breakpoints.xl
+                            ? 4
+                            : constraints.maxWidth >= Breakpoints.lg
+                                ? 3
+                                : constraints.maxWidth >= Breakpoints.md
+                                    ? 2
+                                    : 1,
+                      ),
+                      itemCount: products.length,
+                      itemBuilder: (context, index) {
+                        final product = products[index];
+                        return ProductCard(
+                          product: product,
+                          backgroundColor: index.isEven
+                              ? AppColors.blue
+                              : AppColors.lightBlue,
+                        );
+                      },
                     );
                   },
                 ),
