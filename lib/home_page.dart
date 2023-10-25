@@ -5,6 +5,15 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final border = OutlineInputBorder(
+      borderSide: BorderSide(
+        color: Color.fromRGBO(122, 122, 122, 0.5),
+        // color: Colors.red,
+      ),
+      borderRadius: BorderRadius.horizontal(
+        left: Radius.circular(50),
+      ),
+    );
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -22,7 +31,16 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: TextField(),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Search',
+                      prefixIcon: Icon(
+                        Icons.search,
+                      ),
+                      enabledBorder: border,
+                      focusedBorder: border,
+                    ),
+                  ),
                 )
               ],
             ),
