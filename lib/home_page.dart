@@ -9,12 +9,22 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Text(
-              'Shoes Collection',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 35,
-              ),
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Text(
+                    'Shoes\nCollection',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 35,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: TextField(),
+                )
+              ],
             ),
           ],
         ),
