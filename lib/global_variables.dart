@@ -55,7 +55,7 @@ class CartItem {
   final String id;
   final String productId;
   final int size;
-  final int quantity;
+  int quantity;
 
   CartItem({
     required this.id,
@@ -77,12 +77,3 @@ class CartItem {
             ));
   }
 }
-
-final cart = [
-  CartItem(
-    id: '1',
-    productId: products[0].id,
-    size: products[0].sizes[0],
-    quantity: 1,
-  ),
-];

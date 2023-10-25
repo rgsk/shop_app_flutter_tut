@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_app_flutter_tut/app_colors.dart';
+import 'package:shop_app_flutter_tut/cart_provider.dart';
 import 'package:shop_app_flutter_tut/global_variables.dart';
 
 class ProductDetailsPage extends StatefulWidget {
@@ -11,13 +13,7 @@ class ProductDetailsPage extends StatefulWidget {
 }
 
 class _ProductDetailsPageState extends State<ProductDetailsPage> {
-  late int selectedSize;
-
-  @override
-  void initState() {
-    selectedSize = widget.product.sizes[0];
-    super.initState();
-  }
+  int selectedSize = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +91,36 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     horizontal: 20,
                   ),
                   child: ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (selectedSize != -1) {
+                        Provider.of<CartProvider>(
+                          context,
+                          listen: false,
+                        ).addProduct(
+                          productId: widget.product.id,
+                          size: selectedSize,
+                          quantity: 1,
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Product added successfully!'),
+                            duration: Duration(
+                              seconds: 1,
+                            ),
+                          ),
+                        );
+                      } else {
+                        // notify to select a size
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Please select a Size!'),
+                            duration: Duration(
+                              seconds: 1,
+                            ),
+                          ),
+                        );
+                      }
+                    },
                     icon: Icon(
                       Icons.shopping_cart,
                       color: Colors.black,
