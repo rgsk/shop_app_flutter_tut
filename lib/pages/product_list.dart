@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app_flutter_tut/pages/product_details_page.dart';
 import 'package:shop_app_flutter_tut/utils/app_colors.dart';
+import 'package:shop_app_flutter_tut/utils/breakpoints.dart';
 import 'package:shop_app_flutter_tut/utils/global_variables.dart';
 import 'package:shop_app_flutter_tut/widgets/category.dart';
 import 'package:shop_app_flutter_tut/widgets/product_card.dart';
@@ -23,6 +23,8 @@ class _ProductListState extends State<ProductList> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     final border = OutlineInputBorder(
       borderSide: BorderSide(
         color: Color.fromRGBO(122, 122, 122, 0.5),
@@ -86,36 +88,28 @@ class _ProductListState extends State<ProductList> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: ListView.builder(
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                    childAspectRatio: 1.5,
+                    crossAxisCount: size.width >= Breakpoints.xl
+                        ? 4
+                        : size.width >= Breakpoints.lg
+                            ? 3
+                            : size.width >= Breakpoints.md
+                                ? 2
+                                : 1,
+                  ),
+                  itemCount: products.length,
                   itemBuilder: (context, index) {
                     final product = products[index];
-                    return Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) {
-                                return ProductDetailsPage(
-                                  product: product,
-                                );
-                              },
-                            ));
-                          },
-                          child: ProductCard(
-                            product: product,
-                            backgroundColor: index.isEven
-                                ? AppColors.blue
-                                : AppColors.lightBlue,
-                          ),
-                        ),
-                        if (index != products.length - 1)
-                          SizedBox(
-                            height: 40,
-                          ),
-                      ],
+                    return ProductCard(
+                      product: product,
+                      backgroundColor:
+                          index.isEven ? AppColors.blue : AppColors.lightBlue,
                     );
                   },
-                  itemCount: products.length,
                 ),
               ),
             ),

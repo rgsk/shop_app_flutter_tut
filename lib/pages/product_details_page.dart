@@ -17,6 +17,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -32,7 +33,10 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           Spacer(),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Image.asset(widget.product.imageUrl),
+            child: Image.asset(
+              widget.product.imageUrl,
+              height: size.height / 2.5,
+            ),
           ),
           Spacer(flex: 2),
           Container(
@@ -54,33 +58,37 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 ),
                 SizedBox(
                   height: 50,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: widget.product.sizes.length,
-                    itemBuilder: (context, index) {
-                      final size = widget.product.sizes[index];
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selectedSize = size;
-                            });
-                          },
-                          child: Chip(
-                            label: Text(
-                              size.toString(),
-                              style: TextStyle(
-                                fontSize: 12,
+                  width: double.infinity,
+                  child: Center(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: widget.product.sizes.length,
+                      itemBuilder: (context, index) {
+                        final size = widget.product.sizes[index];
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                selectedSize = size;
+                              });
+                            },
+                            child: Chip(
+                              label: Text(
+                                size.toString(),
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
                               ),
+                              backgroundColor: selectedSize == size
+                                  ? Theme.of(context).primaryColor
+                                  : null,
                             ),
-                            backgroundColor: selectedSize == size
-                                ? Theme.of(context).primaryColor
-                                : null,
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -127,8 +135,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).primaryColor,
-                      minimumSize: Size(
-                        double.infinity,
+                      fixedSize: Size(
+                        350,
                         50,
                       ),
                     ),
