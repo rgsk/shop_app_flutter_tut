@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app_flutter_tut/global_variables.dart';
+import 'package:shop_app_flutter_tut/utils/global_variables.dart';
 import 'package:uuid/uuid.dart';
 
 class CartProvider extends ChangeNotifier {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shop_app_flutter_tut/app_colors.dart';
-import 'package:shop_app_flutter_tut/cart_provider.dart';
-import 'package:shop_app_flutter_tut/global_variables.dart';
+import 'package:shop_app_flutter_tut/providers/cart_provider.dart';
+import 'package:shop_app_flutter_tut/utils/app_colors.dart';
+import 'package:shop_app_flutter_tut/utils/global_variables.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   final Product product;

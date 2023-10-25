@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app_flutter_tut/app_colors.dart';
-import 'package:shop_app_flutter_tut/components/category.dart';
-import 'package:shop_app_flutter_tut/components/product_card.dart';
-import 'package:shop_app_flutter_tut/global_variables.dart';
-import 'package:shop_app_flutter_tut/product_details_page.dart';
+import 'package:shop_app_flutter_tut/pages/product_details_page.dart';
+import 'package:shop_app_flutter_tut/utils/app_colors.dart';
+import 'package:shop_app_flutter_tut/utils/global_variables.dart';
+import 'package:shop_app_flutter_tut/widgets/category.dart';
+import 'package:shop_app_flutter_tut/widgets/product_card.dart';
 
 class ProductList extends StatefulWidget {
   const ProductList({super.key});

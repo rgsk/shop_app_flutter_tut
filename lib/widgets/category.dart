@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app_flutter_tut/app_colors.dart';
+import 'package:shop_app_flutter_tut/utils/app_colors.dart';
 
 class Category extends StatelessWidget {
   final String filter;
