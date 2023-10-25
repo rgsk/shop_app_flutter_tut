@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app_flutter_tut/app_colors.dart';
 
 class Category extends StatelessWidget {
   final String filter;
@@ -19,9 +20,9 @@ class Category extends StatelessWidget {
       child: Chip(
         backgroundColor: active
             ? Theme.of(context).colorScheme.primary
-            : Color.fromRGBO(245, 247, 249, 1),
+            : AppColors.lightBlue,
         side: BorderSide(
-          color: Color.fromRGBO(245, 247, 249, 1),
+          color: AppColors.lightBlue,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),

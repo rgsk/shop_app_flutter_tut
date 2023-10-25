@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app_flutter_tut/app_colors.dart';
 import 'package:shop_app_flutter_tut/components/category.dart';
+import 'package:shop_app_flutter_tut/components/product_card.dart';
+import 'package:shop_app_flutter_tut/global_variables.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -81,6 +84,31 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 },
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    final product = products[index];
+                    return Column(
+                      children: [
+                        ProductCard(
+                          product: product,
+                          backgroundColor: index.isEven
+                              ? AppColors.blue
+                              : AppColors.lightBlue,
+                        ),
+                        if (index != products.length - 1)
+                          SizedBox(
+                            height: 40,
+                          ),
+                      ],
+                    );
+                  },
+                  itemCount: products.length,
+                ),
               ),
             ),
           ],
